@@ -1,0 +1,190 @@
+alias: Matsedel
+description: Veckans matsedel
+trigger:
+  - platform: state
+    entity_id:
+      - sensor.matsedel
+      - sensor.dayoftheweek
+action:
+  - service: open_epaper_link.drawcustom
+    metadata: {}
+    data:
+      dry-run: false
+      payload:
+        - type: rectangle
+          x_start: 5
+          x_end: 635
+          y_start: "{{ (menu_top - (f_size)) - 2}}"
+          y_end: "{{ (menu_top - (f_size/2))  + (1 * y_offset) - 2 }}"
+          width: 5
+          fill: white
+          outline: black
+          visible: >-
+            {%if states('sensor.dayoftheweek') ==
+            "Måndag"%}True{%else%}False{%endif%}
+        - type: rectangle
+          x_start: 5
+          x_end: 635
+          y_start: "{{ (menu_top + (f_size/2)) + (0 * y_offset) + off }}"
+          y_end: "{{ (menu_top - (f_size/2))  + (2 * y_offset) - 2 }}"
+          width: 5
+          fill: white
+          outline: black
+          visible: >-
+            {%if states('sensor.dayoftheweek') ==
+            "Tisdag"%}True{%else%}False{%endif%}
+        - type: rectangle
+          x_start: 5
+          x_end: 635
+          y_start: "{{ (menu_top + (f_size/2)) + (1 * y_offset) + off }}"
+          y_end: "{{ (menu_top - (f_size/2))  + (3 * y_offset) - 2 }}"
+          width: 5
+          fill: white
+          outline: black
+          visible: >-
+            {%if states('sensor.dayoftheweek') ==
+            "Onsdag"%}True{%else%}False{%endif%}
+        - type: rectangle
+          x_start: 5
+          x_end: 635
+          y_start: "{{ (menu_top + (f_size/2+2)) + (2 * y_offset) + off }}"
+          y_end: "{{ (menu_top - (f_size/2))  + (4 * y_offset) - 2 }}"
+          width: 5
+          fill: white
+          outline: black
+          visible: >-
+            {%if states('sensor.dayoftheweek') ==
+            "Torsdag"%}True{%else%}False{%endif%}
+        - type: rectangle
+          x_start: 5
+          x_end: 635
+          y_start: "{{ (menu_top + (f_size/2+2)) + (3 * y_offset) + off }}"
+          y_end: "{{ (menu_top - (f_size/2))  + (5 * y_offset) -2 }}"
+          width: 5
+          fill: white
+          outline: black
+          visible: >-
+            {%if states('sensor.dayoftheweek') ==
+            "Fredag"%}True{%else%}False{%endif%}
+        - type: rectangle
+          x_start: 5
+          x_end: 635
+          y_start: "{{ (menu_top + (f_size/2+2)) + (4 * y_offset) + off }}"
+          y_end: "{{ (menu_top - (f_size/2))  + (6 * y_offset) - 2 }}"
+          width: 5
+          fill: white
+          outline: black
+          visible: >-
+            {%if states('sensor.dayoftheweek') ==
+            "Lördag"%}True{%else%}False{%endif%}
+        - type: rectangle
+          x_start: 5
+          x_end: 635
+          y_start: "{{ (menu_top + (f_size/2)) + (5 * y_offset) + off }}"
+          y_end: "{{ (menu_top - (f_size/2))  + (7 * y_offset) - 2 }}"
+          width: 5
+          fill: white
+          outline: black
+          visible: >-
+            {%if states('sensor.dayoftheweek') ==
+            "Söndag"%}True{%else%}False{%endif%}
+        - type: icon
+          value: silverware-variant
+          x: 10
+          "y": 0
+          size: 100
+          color: black
+        - type: icon
+          value: silverware-variant
+          x: 535
+          "y": 0
+          size: 100
+          color: black
+        - type: text
+          value: Matsedel
+          anchor: mt
+          x: "{{ mid_x }}"
+          "y": 50
+          font: /media/arialbd.ttf
+          size: 50
+        - type: text
+          value: Lunch
+          anchor: mt
+          x: "{{ lunch_center }}"
+          "y": 110
+          font: /media/arialbd.ttf
+          size: 25
+          color: black
+        - type: text
+          value: Middag
+          anchor: mt
+          x: "{{ dinner_center }}"
+          "y": 110
+          font: /media/arialbd.ttf
+          size: 25
+          color: black
+        - type: multiline
+          value: Måndag|Tisdag|Onsdag|Torsdag|Fredag|Lördag|Söndag
+          delimiter: "|"
+          font: /media/arialbd.ttf
+          anchor: lm
+          start_y: "{{menu_top}}"
+          offset_y: 30
+          x: 25
+          size: "{{f_size}}"
+          color: black
+        - type: multiline
+          value: "{{mol}}|{{til}}|{{onl}}|{{tol}}|{{frl}}|{{lol}}|{{sul}}"
+          delimiter: "|"
+          font: /media/arialbd.ttf
+          start_y: "{{menu_top}}"
+          offset_y: 30
+          x: "{{ lunch_center }}"
+          size: "{{f_size}}"
+          color: black
+          anchor: mm
+        - type: multiline
+          value: "{{mom}}|{{tim}}|{{onm}}|{{tom}}|{{frm}}|{{lom}}|{{sum}}"
+          delimiter: "|"
+          font: /media/arialbd.ttf
+          start_y: "{{menu_top}}"
+          offset_y: 30
+          x: "{{ dinner_center }}"
+          size: "{{f_size}}"
+          color: black
+          anchor: mm
+        - type: text
+          value: >-
+            Uppdaterad: {{ as_timestamp(now()) | timestamp_custom('%H:%M
+            %d-%m-%Y', True) }}
+          x: 485
+          "y": 370
+          font: /media/arialbd.ttf
+          size: 10
+          color: black
+    target:
+      entity_id: open_epaper_link.000001EF0F447338
+mode: single
+variables:
+  f_size: 17
+  "off": 4
+  y_offset: 30
+  mid_x: 320
+  menu_top: 160
+  menu_header: 225
+  lunch_center: 225
+  dinner_center: 500
+  mol: "{{state_attr('sensor.matsedel', 'Måndag')['Lunch']}}"
+  mom: "{{state_attr('sensor.matsedel', 'Måndag')['Middag']}}"
+  til: "{{state_attr('sensor.matsedel', 'Tisdag')['Lunch']}}"
+  tim: "{{state_attr('sensor.matsedel', 'Tisdag')['Middag']}}"
+  onl: "{{state_attr('sensor.matsedel', 'Onsdag')['Lunch']}}"
+  onm: "{{state_attr('sensor.matsedel', 'Onsdag')['Middag']}}"
+  tol: "{{state_attr('sensor.matsedel', 'Torsdag')['Lunch']}}"
+  tom: "{{state_attr('sensor.matsedel', 'Torsdag')['Middag']}}"
+  frl: "{{state_attr('sensor.matsedel', 'Fredag')['Lunch']}}"
+  frm: "{{state_attr('sensor.matsedel', 'Fredag')['Middag']}}"
+  lol: "{{state_attr('sensor.matsedel', 'Lördag')['Lunch']}}"
+  lom: "{{state_attr('sensor.matsedel', 'Lördag')['Middag']}}"
+  sul: "{{state_attr('sensor.matsedel', 'Söndag')['Lunch']}}"
+  sum: "{{state_attr('sensor.matsedel', 'Söndag')['Middag']}}"
