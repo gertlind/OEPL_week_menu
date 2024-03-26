@@ -1,0 +1,19 @@
+- platform: rest
+  resource: http://192.168.1.111/current/meny.json
+  name: matsedel
+  scan_interval: 30
+  method: GET
+  json_attributes:
+    - Måndag
+    - Tisdag
+    - Onsdag
+    - Torsdag
+    - Fredag
+    - Lördag
+    - Söndag
+  value_template: >-
+    {% if now().hour < 15 %}
+    {{ state_attr('sensor.matsedel', states('sensor.dayoftheweek'))['Lunch'] }}
+    {% else %}
+    {{ state_attr('sensor.matsedel', states('sensor.dayoftheweek'))['Middag']}}
+    {% endif %}
