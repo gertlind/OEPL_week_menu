@@ -1,0 +1,37 @@
+{
+  "Måndag":
+    {
+      "Lunch": "Kycklingfilé ",
+      "Middag": "Lammstek rösti potatis"
+    },
+  "Tisdag":
+    {
+      "Lunch": "Stekt strömming med potatismos",
+      "Middag": "Pizza"
+    },
+  "Onsdag":
+    {
+      "Lunch": "Raggmunk med stekt fläsk.",
+      "Middag": "Tom kha gai"
+    },
+  "Torsdag":
+    {
+      "Lunch": "Ärtsoppa med fläsk",
+      "Middag": "Fläsklägg med rotmos"
+    },
+  "Fredag":
+    {
+      "Lunch": "Laxpasta",
+      "Middag": "Texas Longhorn"
+    },
+  "Lördag":
+    {
+      "Lunch": "Ungersk fiskgryta",
+      "Middag": "Köttgryta Piri-piri med ris"
+    },
+ "Söndag":
+    {
+      "Lunch": "Rostbiff med potatisgratäng",
+      "Middag": "Kycklingfilé med friterad klyftpotatis"
+    }
+}
