@@ -8,6 +8,7 @@ Place the menu.json on a webserver, I did put on the OEPL access point in the fo
 Just to mention, I tried to put the json file in the www and also the root folder of the AP. Neither of those worked for me.
 
 Create the rest sensor in Home Assistant. Change ip address and folder to where you did put it.
+Create the dayoftheweek sensor.
 
 
 The automation will run and update the e-paper screen as soon as meny.json changes.
