@@ -11,4 +11,4 @@ Create the rest sensor in Home Assistant. Change ip address and folder to where 
 Create the dayoftheweek sensor.
 
 
-The automation will run and update the e-paper screen as soon as meny.json changes.
+The automation will run and update the e-paper screen as soon as meny.json changes and at midnight to change day.
