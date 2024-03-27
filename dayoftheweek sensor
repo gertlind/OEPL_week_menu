@@ -1,3 +1,4 @@
+template:
   - sensor:
       - name: "dayoftheweek"
         unique_id: day_of_the_week
